@@ -7,9 +7,10 @@ import SEOHead from "../components/head"
 
 export default function Homepage(props) {
   const { homepage } = props.data
-
+  const gtmCode = props.data.homepage.gtmCodeBody
   return (
     <Layout>
+      <noscript>{gtmCode}</noscript>
       {homepage.blocks.map((block) => {
         const { id, blocktype, ...componentProps } = block
         const Component = sections[blocktype] || Fallback
@@ -22,12 +23,17 @@ export const Head = (props) => {
   const { homepage } = props.data
   return <SEOHead {...homepage} />
 }
+
 export const query = graphql`
   {
     homepage {
       id
       title
-      description
+      description     
+      ... on DatoCmsHomepage {
+        gtmCodeHead
+        gtmCodeBody
+      }
       image {
         id
         url

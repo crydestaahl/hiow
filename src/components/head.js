@@ -1,8 +1,11 @@
 import * as React from "react"
 
-export default function Head({ title, description, image }) {
+export default function Head({ title, description, image, gtmCodeHead }) {
   return (
     <>
+      <script>
+        {gtmCodeHead}
+      </script>
       <meta charSet="utf-8" />
       <title>{title}</title>
       {description && (
